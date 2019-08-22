@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>this is detail</h1><br>
+<div class="row">
+    <div class="col-2">
+        <img src="{{ alldetail.icon.url}}" class="img-fluid"/>
+    </div>
+     <div class="col-10">
+        <a href="{{ alldetail.url }}"><h1>{{ alldetail.title }}</h1></a>
+    </div>
+</div><br>
+<div class="row">
+    <div class="col-8">
+        <img src="{{ alldetail.image.url }}" class="img-fluid"/>
+    </div>
+      <div class="col-4">
+        <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-lg btn-block">Votes{{ alldetail.upvote_total }}</button></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <h2><i class="fa fa-search"></i> {{ alldetail.hunter.username }}</h2>
+    </div>
+    <div class="col-4 text-right">
+        <h2> <i class="fa fa-clock-o"></i>{{ alldetail.date }}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        {{ alldetail.body }}
+    </div>
+</div>
+<form id="upvote" method="POST" action="{% url 'upvote' alldetail.id %}">
+    {% csrf_token %}
+    <input type="hidden"/>
+</form>
+{% endblock%}
